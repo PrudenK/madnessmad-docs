@@ -20,6 +20,8 @@ Además de un modo legacy para aquellos usuarios que venga de editores más anti
 
 ### 🛠️ Índice técnico
 - [🧱 Arquitectura del Estado del Grafo](#-arquitectura-del-estado-del-grafo)
+- [🔵 VertexModel](#-VertexModel)
+- [➡️ EdgeModel](#-EdgeModel)
 
 ## 🎥 Vídeo de la interfaz
 
@@ -70,7 +72,7 @@ como la creación de vértices y aristas, así como la interacción con los elem
 
 ---
 
-#### 🔺 Aristas
+#### ➡️ Aristas
 - **CI + Ctrl + arrastrar (sobre el peso o punto medio):** curvar arista
 
 ---
@@ -202,7 +204,7 @@ Esto permitiría a los usuarios transferir grafos entre MadnessMad y SwGraphs si
 
 # 🧬 Apartado técnico
 
-## 🧠 Arquitectura del estado del drafo
+## 🧠 Arquitectura del estado del grafo
 
 ### GraphState
 * Contenedor raíz que agrupa todos los subestados del editor.
@@ -227,7 +229,7 @@ Esto permitiría a los usuarios transferir grafos entre MadnessMad y SwGraphs si
 
 ---
 
-## VertexModel
+## 🔵 VertexModel
 
 ```kotlin
 data class VertexModel(
@@ -242,7 +244,7 @@ data class VertexModel(
 
 ---
 
-## EdgeModel
+## ➡️ EdgeModel
 
 ```kotlin
 data class EdgeModel(
@@ -269,4 +271,3 @@ La curvatura de la arista se obtiene aplicando una curva de Bézier, como se mue
 ![bezier_curvatura](/assets/beizer.jpg)
 
 ---
-
