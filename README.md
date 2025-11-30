@@ -176,10 +176,16 @@ Ejemplo de la matriz de incidencia de [este grafo](./assets/ejemplo_grafo_json.j
 
 ## 📂 Importaciones y Exportaciones
 
-### Importar/exportar grafo completo (.json)
+Antes de entrar en profundidad con importaciones y exportaciones veamos un esquema acerca de este punto:
 
-El sistema principal de importación y exportación de grafos completos será mediante archivos JSON.
-Estos archivos contendrán toda la información necesaria para reconstruir el grafo en la interfaz de MadnessMad:
+![mapa_de_archivo](./assets/mapa_de_archivo.png)
+
+### Importaciones
+
+#### Grafo completo (.json)
+
+El sistema principal de importación y nativo de MadnessMad por su eficiencia para almacenar gran cantidad de importación
+y su compatibilidad con la librería `"org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1"`.
 
 Por ejemplo para el siguiente grafo:
 
@@ -187,18 +193,72 @@ Por ejemplo para el siguiente grafo:
 
 El archivo JSON correspondiente lo puedes ver [aquí](./assets/ejemplo_grafo_json.json).
 
-### Importar/exportar matrices (.csv)
+#### Grafo a partir de un archivo .csv
 
-Se podrán importar grafos mediante archivos .csv por matriz de adyacencia, de incidencia y de pesos.
-También el propio programa tendrá una tabla interna para crear grafos de forma manual:
+* [Matriz de adyacencia](./assets/archivo/matriz_adyacencia.csv)
+* [Matriz de pesos](./assets/archivo/matriz_pesos.csv)
+* [Matriz de incidencia](./assets/archivo/matriz_incidencia.csv)
 
-![importar_matriz_a_mano](/assets/importar_matriz_a_mano.png)
+Para la matriz de adyacencia y de pesos los últimos dos parámetros sueltos pueden ser 1 o 0 y pueden estar en el csv o no,
+si no están por defecto ambos son 1. Indican, el primero si es o no ponderado y el segundo si es o no dirigido el grafo.
 
-Esta opción todavía está en desarrollo.
 
-### Importar/exportar formato SwGraphs (.xml)
-Si fuese necesario, se podría implementar la importación y exportación de grafos en formato XML compatible con SwGraphs.
-Esto permitiría a los usuarios transferir grafos entre MadnessMad y SwGraphs sin perder información
+#### A mano desde la interfaz
+El propio programa permite importar estas 3 matrices a partir de la propia interfaz de forma manual:
+
+![matriz_adyacencia](/assets/matriz_ady.gif)
+
+* Si la matriz es de adyacencia:
+    - Por defecto será dirigido y ponderado (1.0 para todas las aristas)
+    - Admite multiplicidad
+    - Admite bucles
+* Si la matriz es de pesos:
+    - Por defecto será dirigido y ponderado
+    - No admite multiplicidad
+    - Admite bucles
+* Si la matriz es de incidencia:
+    - Por defecto es no dirigido y ponderado (1.0 para todas las aristas)
+    - Admite bucles, con un 2
+    - No permite que la suma de las columnas sea distinto de 2 aunque si permite que sea 0 y esa arista no se dibuja
+
+#### Por un grafo de SwGraphs (.xml)
+
+Pendiente de ser implementado
+
+### Exportaciones
+
+#### Grafo completo (.json)
+
+Igual que en el apartado de importaciones
+
+#### Grafo a partir de un archivo (.csv)
+
+Esta exportación se realizará desde el icono de "Matriz" desde la toolbar, permitiendo exportar los 3 tipos de matrices ya mencionados.
+
+Como la matriz de pesos no admite multiplicidad, si hay varias aristas paralelas entre dos vértices se añadirá en esa
+relación la suma de los pesos de las aristas paralelas que lleven la misma dirección si el grafo es dirigido.
+
+#### Por un grafo de SwGraphs (.xml)
+
+Pendiente de ser implementado
+
+### Guía de errores a la hora de importar un grafo
+
+* En el futuro, en la doc de la página web se dejarán ejemplo detallados de como solucionar errores,
+* para ello en el díalogo de erro se añadirá un link al error en cuestión en la web
+
+#### Archivo .json
+
+Aquí se pueden dar 3 tipos de errores:
+* [InvalidJsonStructure](./assets/jsonError/InvalidJsonStructure.json): simplemente la estructura del json no es correcta
+* [InvalidVertex](./assets/jsonError/InvalidVertex.json): la estructura es correcta, pero hay algo incorrecto en algún vértice del json (normalmente en el style)
+* [InvalidEdge](./assets/jsonError/InvalidEdge.json): la estructura es correcta, pero hay algo incorrecto en alguna arista del json (normalmente en el style)
+
+#### Archivo .csv
+
+Aquí pueden haber 2 tipos de errores:
+* [InvalidCSVFormat](./assets/csvErrors/InvalidCSVFormat.csv): el formato del CSV es incorrecto
+* [InvalidCSVIncidenceColumn](./assets/csvErrors/InvalidCSVIncidenceColumn.csv): cuando una columna suma un número disintos de 0 y de 2
 
 ---
 
@@ -271,3 +331,4 @@ La curvatura de la arista se obtiene aplicando una curva de Bézier, como se mue
 ![bezier_curvatura](/assets/beizer.jpg)
 
 ---
+
