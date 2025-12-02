@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36" version="29.2.1">
   <diagram name="Página-1" id="0w9qm_8bepOYJnnanaeK">
-    <mxGraphModel dx="951" dy="526" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="833" dy="461" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -85,7 +85,7 @@
         <mxCell id="2piy655edyc5YHeQLSFA-25" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Incidencia (Solo aristas)" vertex="1">
           <mxGeometry height="20" width="351.24" x="663.3699999999999" y="300" as="geometry" />
         </mxCell>
-        <mxCell id="2piy655edyc5YHeQLSFA-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Pendiente" vertex="1">
+        <mxCell id="2piy655edyc5YHeQLSFA-26" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Compatible con SWGraphs" vertex="1">
           <mxGeometry height="20" width="190" x="662.5" y="335" as="geometry" />
         </mxCell>
         <mxCell id="2piy655edyc5YHeQLSFA-27" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="2piy655edyc5YHeQLSFA-31">
@@ -154,7 +154,7 @@
         <mxCell id="2piy655edyc5YHeQLSFA-44" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="XML (SW)" vertex="1">
           <mxGeometry height="20" width="80" x="516.3999999999996" y="595" as="geometry" />
         </mxCell>
-        <mxCell id="2piy655edyc5YHeQLSFA-45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Pendiente" vertex="1">
+        <mxCell id="2piy655edyc5YHeQLSFA-45" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Compatible con SWGraphs" vertex="1">
           <mxGeometry height="20" width="190" x="662.5" y="595" as="geometry" />
         </mxCell>
       </root>

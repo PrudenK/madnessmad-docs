@@ -17,6 +17,7 @@ Además de un modo legacy para aquellos usuarios que venga de editores más anti
 - [🧠 Algorítmos](#-algorítmos)
 - [🧮 Matrices del grafo](#-matrices-del-grafo)
 - [📂 Importaciones y Exportaciones](#-importaciones-y-exportaciones)
+- [⚙️ Opciones de grafo](#-opciones-del-grafo)
 
 ### 🛠️ Índice técnico
 - [🧱 Arquitectura del Estado del Grafo](#-arquitectura-del-estado-del-grafo)
@@ -223,7 +224,7 @@ El propio programa permite importar estas 3 matrices a partir de la propia inter
 
 #### Por un grafo de SwGraphs (.xml)
 
-Pendiente de ser implementado
+Simplemente el programar permite importar un fichero .xml con el formato de SWGraphs
 
 ### Exportaciones
 
@@ -240,7 +241,7 @@ relación la suma de los pesos de las aristas paralelas que lleven la misma dire
 
 #### Por un grafo de SwGraphs (.xml)
 
-Pendiente de ser implementado
+Simplemente el programar permite exportar un fichero .xml con el formato de SWGraphs
 
 ### Guía de errores a la hora de importar un grafo
 
@@ -259,6 +260,46 @@ Aquí se pueden dar 3 tipos de errores:
 Aquí pueden haber 2 tipos de errores:
 * [InvalidCSVFormat](./assets/csvErrors/InvalidCSVFormat.csv): el formato del CSV es incorrecto
 * [InvalidCSVIncidenceColumn](./assets/csvErrors/InvalidCSVIncidenceColumn.csv): cuando una columna suma un número disintos de 0 y de 2
+
+#### Archivo .xml
+* [InvalidXMLFormat](./assets/xmlError/InvalidXMLFormat.xml): el formato del xml es incorrecto
+
+---
+
+## ⚙️ Opciones de grafo
+
+### Información del grafo
+
+///
+
+### Grados de los vértices
+///
+
+### Grafo subyacente
+
+Convierte el grafo a no dirigido, si el grafo es dirigido y tiene 2 aristas entre 2 vértices de direcciones opuestas
+y con el mismo peso, elimina una de ellas.
+
+### Convertir a dirigido (bidireccional)
+
+Realiza la acción contraria al **Grafo subyacente**.
+
+#### Si el grafo es **no dirigido**
+- Cada arista `{u, v}` se convierte en **dos aristas dirigidas**:
+  - `u → v`
+  - `v → u`
+- Ambas mantienen el mismo peso que la arista original.
+- El grafo pasa a ser dirigido.
+
+#### Si el grafo es **dirigido**
+- Para cada par de vértices conectados:
+  - Se agrupan las aristas por **peso**.
+  - Para cada peso `w`, si **todas** las aristas con peso `w` entre esos dos vértices van en **una única dirección**,
+    se añade **una arista** en la dirección opuesta con el mismo peso `w`.
+  - Si ya existe una arista de peso `w` en ambos sentidos, **no se añade nada** para ese peso.
+
+
+Esta operación garantiza la **bidireccionalidad mínima**, sin alterar las multiplicidades ni duplicar aristas innecesariamente.
 
 ---
 
@@ -331,4 +372,3 @@ La curvatura de la arista se obtiene aplicando una curva de Bézier, como se mue
 ![bezier_curvatura](/assets/beizer.jpg)
 
 ---
-
