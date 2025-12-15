@@ -1,100 +1,112 @@
 # 🕸️ MadnessMad
 
+### Documentación externa
+
+---
+
+- [1 Introducción](#1-introducción)
+- [2 Interfaz](#2-interfaz)
+  - [2.1 Vértices](#21-vértices)
+  - [2.2 Aristas](#22-aristas)
+  - [2.3 TopBar]()
+  - [2.4 ToolBar]()
+- [3 Controles del grafo](#3-controles-del-grafo)
+  - [3.1 Ratón](#31-ratón)
+  - [3.2 Teclado](#32-teclado)
+- [4 Algoritmos](#4-algoritmos)
+  - [4.1 Implementados](#41-implementados)
+  - [4.2 Animaciones](#42-animaciones)
+- [5 Algoritmos de redes sociales](#5-algoritmos-de-redes-sociales)
+- [6 Opciones de información del grafo](#6-opciones-de-información-del-grafo)
+- [7 Matrices del grafo](#7-matrices-del-grafo)
+- [8 Archivo (Importaciones y exportaciones)](#8-archivo-importaciones-y-exportaciones)
+
+
+---
+
+## 1 Introducción
+
 MadnessMad es un editor de grafos desarrollado con kotlin y Jetpack Compose.
-Este proyecto tiene como objetivo proporcionar una herramienta intuitiva y potente para la creación, visualización y manipulación de grafos, así como la ejecución de algoritmos clásicos sobre ellos.
+Este proyecto tiene como objetivo proporcionar una herramienta intuitiva y potente para la creación, visualización
+y manipulación de grafos, así como la ejecución de algoritmos clásicos sobre ellos.
 
 Es un proyecto que apuesta por la modularidad y la escalabilidad, permitiendo futuras expansiones y mejoras en su funcionalidad.
 Así como una interfaz sencilla y minimalista que ofrece un control total a la hora de manipular el grafo.
 
 Cuenta con una gran variedad de atajos de teclado que permiten una gran velocidad a la hora de editar el grafo.
-Además de un modo legacy para aquellos usuarios que venga de editores más antiguos como SWGraphs (TODO: todavía no implementado).
 
+## 2 Interfaz
 
-### 📑 Índice funcional
+MadnessMad apuesta por una interfaz minimalista a la par que práctica e intuitiva.
 
-- [🎥 Vídeo de la interfaz](#-vídeo-de-la-interfaz)
-- [🎮 Controles y funcionalidades](#-controles-del-editor-de-grafos)
-- [🧠 Algorítmos](#-algorítmos)
-- [🧮 Matrices del grafo](#-matrices-del-grafo)
-- [📂 Importaciones y Exportaciones](#-importaciones-y-exportaciones)
-- [⚙️ Opciones de grafo](#-opciones-del-grafo)
+![interfaz.png](assets/external/interfaz.png)
 
-### 🛠️ Índice técnico
-- [🧱 Arquitectura del Estado del Grafo](#-arquitectura-del-estado-del-grafo)
-- [🔵 VertexModel](#-VertexModel)
-- [➡️ EdgeModel](#-EdgeModel)
+### 2.1 Vértices
 
-## 🎥 Vídeo de la interfaz
+Características de los vértices:
+* Se crean con la tecla `V`
+* Se les puede cambiar el nombre con la tecla `R` o abriendo el menu contextual con click derecho.
+* Se les puede cambiar el color con la tecla `C` o abriendo el menu contextual con click derecho.
+* Se les puede cambiar el estilo con la tecla `F`.
+* Su tamaño puede ser modificado con `Crtl +` y `Ctrl -`.
 
-![BFS](/assets/interfaz.gif)
+### 2.2 Aristas
 
-En este vídeo se puede observar la interfaz principal del editor de grafos, mostrando algunas de sus funcionalidades básicas
-como la creación de vértices y aristas, así como la interacción con los elementos del grafo.
+Características de las aristas:
+- Las aristas se crean arrastrando desde un vértice hasta otro con el `click izquierdo`.
+- Peso, nombre, color, curvatura, dirección y estilos son modificables por el usuario. Ver en [3 Controles del grafo](#3-controles-del-grafo).
+- Con la tecla `E` el usuario puede alternar el texto de las aristas entre peso, nombre, ambos, nada.
 
+## 3 Controles del grafo
 
-## 🎮 Controles del editor de grafos
+El usuario puede modificar los atajos de tecla a su gusto desde la opción `ajustes`. (// TODO)
 
-### 🖱 Interacciones en el vacío
+### 3.1 Ratón
 
-#### ⬜ Sin nada seleccionado
-- **CD + arrastrar:** mover el lienzo
-- **RR + Ctrl:** hacer zoom
-- **CI + Shift:** seleccionar zona rectángular
+* Interacciones en el vacío
+    * Sin nada seleccionado
+        - **CD + arrastrar:** mover el lienzo
+        - **RR + Ctrl:** hacer zoom
+        - **CI + Shift:** seleccionar zona rectángular
 
-#### 🔍 Con un elemento seleccionado
-- **CD:** abrir menú contextual del elemento
-- **CI:** deseleccionar
+    * Con un elemento seleccionado
+        - **CD:** abrir menú contextual del elemento
+        - **CI:** deseleccionar
 
-#### 📦 Con varios elementos seleccionados
-- **CI:** deseleccionar todos
-- **CD:** abrir menú múltiple
-  - Todos **aristas** → menú múltiple de aristas
-  - Todos **vértices** → menú múltiple de vértices
-  - Mixto → menú combinado con opciones comunes
+    * Con varios elementos seleccionados
+        - **CI:** deseleccionar todos
+        - **CD:** abrir menú múltiple
+            - Todos **aristas** → menú múltiple de aristas
+            - Todos **vértices** → menú múltiple de vértices
+            - Mixto → menú combinado con opciones comunes
 
----
+* Interacciones con elementos
+    * Elementos (general)
+        - **CI:** seleccionar elemento
+        - **CI + Mayús:** selección múltiple
+        - **CD:** abrir menú contextual del elemento
+        - **CI + Mayús + arrastrar:** selección rectangular
+            - Incluye bucles de vértices seleccionados
+            - Incluye aristas si ambos vértices se seleccionan a la vez
 
-### 🔹 Interacciones con elementos
+* Vértices
+    - **CI + arrastrar:** crear arista hasta otro vértice
+    - **CI + Ctrl + arrastrar:** mover vértice
+    - **Ctrl + + / -:** cambiar tamaño de los vértices seleccionados
 
-#### 🧩 Elementos (general)
-- **CI:** seleccionar elemento
-- **CI + Mayús:** selección múltiple
-- **CD:** abrir menú contextual del elemento
-- **CI + Mayús + arrastrar:** selección rectangular
-  - Incluye bucles de vértices seleccionados
-  - Incluye aristas si ambos vértices se seleccionan a la vez
+* Aristas
+    - **CI + Ctrl + arrastrar (sobre el peso o punto medio):** curvar arista
 
----
+* Bucles
+    - **CI + Ctrl + arrastrar:** ajustar tamaño
+    - **CI + Mayús + arrastrar:** rotar bucle
 
-#### 🔵 Vértices
-- **CI + arrastrar:** crear arista hasta otro vértice
-- **CI + Ctrl + arrastrar:** mover vértice
-- **Ctrl + + / -:** cambiar tamaño de los vértices seleccionados
+* Leyenda
+    - **CD:** Click Derecho
+    - **CI:** Click Izquierdo
+    - **RR:** Rueda del ratón
 
----
-
-#### ➡️ Aristas
-- **CI + Ctrl + arrastrar (sobre el peso o punto medio):** curvar arista
-
----
-
-#### 🔁 Bucles
-- **CI + Ctrl + arrastrar:** ajustar tamaño
-- **CI + Mayús + arrastrar:** rotar bucle
-
----
-
-#### 📘 Leyenda
-- **CD:** Click Derecho
-- **CI:** Click Izquierdo
-- **RR:** Rueda del ratón
-
----
-
-### ⌨️ Atajos de teclado
-
-Los atajos de teclado se almacenarán en una base de datos interna y el usuario
-podrá modificarlos a su gusto (en un futuro) desde la interfaz del programa.
+### 3.2 Teclado
 
 | Tecla        | Acción                           |
 |:-------------|:---------------------------------|
@@ -112,263 +124,96 @@ podrá modificarlos a su gusto (en un futuro) desde la interfaz del programa.
 | **Ctrl + Z** | Deshacer última acción           |
 | **Ctrl + Y** | Rehacer última acción            |
 
----
+// TODO: Ctrl + C, Ctrl + V, Ctrl + D, Ctrl + X, Alt 1, Alt 2 (Alt x para opciones de la toolbar) serán agregados en el futuro
 
-## ⚙️ Algorítmos
+## 4 Algoritmos
 
-#### Algoritmos implementados:
+Los algoritmos se seleccionan desde el menu en la parte superior llamado `algoritmos` y aparece el algoritmo seleccionado
+en la parte superior derecha.
 
-* BFS
-* DFS
-* Dijkstra
-* Kruskal
-* Hierholzer
+Para ejecutarlos se usa el icono de `ejecutar` o en su defecto si el algoritmo lo permite, `por pasos`.
 
-#### ⚫ Algoritmos por implementar (si o si):
-* Edmonds 2
-* Cartero chino
-* Ford-Fulkerson
-* Ciclo hamiltoniano de 'bajo' peso
-* Ciclo hamiltoniano de mínimo peso
-* Hopcroft-Tarjan
+### 4.1 Implementados
 
-#### ⚫ Posibles implementaciones futuras (no prioritarias):
-* Prim
-* Bellman–Ford
-* Floyd–Warshall
-* Kosaraju
-* Tarjan (SCC)
-* Tarjan (puentes y articulaciones)
-* A*
-* Johnson
-* Dinic
-* Hungarian
-* Bron–Kerbosch
-* Stoer–Wagner
-* Emparejamiento máximo (Hopcroft–Karp)
+| Algoritmo                               | Descripción breve                                                                 |
+|:----------------------------------------|:----------------------------------------------------------------------------------|
+| **BFS**                                 | Recorre el grafo por niveles desde un vértice origen (búsqueda en anchura).       |
+| **DFS**                                 | Recorre el grafo profundizando lo máximo posible antes de retroceder.             |
+| **Dijkstra**                            | Calcula el camino más corto desde un origen sin permitir pesos negativos.         |
+| **Bellman–Ford**                        | Calcula caminos mínimos permitiendo pesos negativos y detecta ciclos negativos.  |
+| **Kruskal**                             | Construye un árbol de expansión mínima en grafos no dirigidos.                    |
+| **Edmonds 2**                           | Calcula emparejamientos máximos en grafos generales.                              |
+| **Hierholzer**                          | Obtiene un ciclo o camino euleriano recorriendo todas las aristas una vez.        |
+| **Cartero Chino**                       | Encuentra el recorrido cerrado de coste mínimo que pasa por todas las aristas.    |
+| **Ford–Fulkerson**                     | Calcula el flujo máximo entre un origen y un destino en una red.                  |
+| **Ciclo hamiltoniano de bajo peso**     | Busca un ciclo hamiltoniano válido priorizando pesos bajos (heurístico).          |
+| **Ciclo hamiltoniano de mínimo peso**   | Calcula el ciclo hamiltoniano de coste mínimo por fuerza bruta.                   |
+| **Hopcroft–Tarjan**                     | Detecta vértices de corte y aristas de corte en grafos no dirigidos.              |
 
-#### ⚫ Acciones que eliminan el color de la animación:
-* Borrar vértice/s
-* Borrar arista/s
-* Cambiar dirección de arista/s
-* Añadir aristas
-* Añadir vértices
-* Alternar entre grafo dirigido y no dirigido
-* Alternar entre grafo ponderado y no ponderado (Dijkstra, kruskal)
-* Cambiar peso de arista/s (Dijkstra, kruskal)
 
-La idea de esto es que si en cualquier momento se modifica el grafo con algo que altera
-su estructura significativamente para el cálculo del algoritmo, el algoritmo se quite para evitar confusiones.
+### 4.2 Animaciones
 
-#### ⚫ Ejemplo de algoritmo en el programa: BFS
+Algunos algoritmos permiten animaciones, esto facilita la comprensión de los mismos.
 
-![BFS](/assets/bfs_ejemplo.gif)
+El siguiente vídeo muestra la animación del algoritmo de Ford-Fulkerson:
 
----
+![ford-fulkerson.gif](assets/external/ford-fulkerson.gif)
 
-## 🧮 Matrices del grafo
 
-El programa da la opción de visualizar las matrices de adyacencia, incidencia y de pesos del grafo.
-Ejemplo de la matriz de incidencia de [este grafo](./assets/ejemplo_grafo_json.json)
+## 5 Algoritmos de redes sociales
 
-![matriz_incidencia](/assets/visualizacion_matriz.png)
+| Métrica                               | Descripción breve                                                                 |
+|:--------------------------------------|:----------------------------------------------------------------------------------|
+| **Centralidad de grado**              | Mide el número de conexiones directas de un vértice.                              |
+| **Centralidad de intermediación**     | Cuantifica cuántos caminos mínimos pasan por un vértice.                          |
+| **Centralidad de cercanía**           | Mide lo cerca que está un vértice del resto según distancias mínimas.             |
+| **Centralidad de excentricidad**      | Se basa en la mayor distancia mínima desde un vértice a cualquier otro.           |
+| **Clustering global**                 | Evalúa el grado de agrupamiento global del grafo completo.                        |
+| **Clustering local**                  | Mide cómo de conectados están entre sí los vecinos de un vértice.                |
+| **Clustering medio**                  | Media del clustering local de todos los vértices del grafo.                      |
+| **Alcance medio**                     | Distancia media entre pares de vértices alcanzables del grafo.                    |
+| **Diámetro**                          | Máxima distancia mínima entre cualquier par de vértices del grafo.                |
+| **PageRank**                          | Asigna importancia a los vértices según enlaces entrantes y su relevancia.        |
 
----
 
-## 📂 Importaciones y Exportaciones
+## 6 Opciones de información del grafo
 
-Antes de entrar en profundidad con importaciones y exportaciones veamos un esquema acerca de este punto:
+Desde el menú superior `Grafo` el usuario tiene las siguientes opciones:
 
-![mapa_de_archivo](./assets/mapa_de_archivo.png)
+- `Información del grafo`: muestra información general del grafo como:
+  - Número de elementos (vértices, aristas, bucles, aristas paralelas).
+  - Peso total.
+  - Conectividad del grafo.
+  - Desigualdad triangular.
+- `Grados de los vértices`: si el grafo es dirigidos muestra de entrada y de salida.
+- `Grafo subyacente`: convierte el grafo a no dirigido.
+- `Convertir a dirigido (bidireccional)`: convierte un grafo no dirigido a uno dirigido duplicando las aristas en dirección contraria.
+- `Generar grafo completo`: genera un grafo completo de hasta 25 vértices.
 
-### Importaciones
+## 7 Matrices del grafo
 
-#### Grafo completo (.json)
+Desde la opción `Matriz` puedes visualizar las siguientes matrices del grafo actual:
+- De adyacencia.
+- De pesos.
+- De incidencia.
+- De acceso.
 
-El sistema principal de importación y nativo de MadnessMad por su eficiencia para almacenar gran cantidad de importación
-y su compatibilidad con la librería `"org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1"`.
+## 8 Archivo (Importaciones y exportaciones)
 
-Por ejemplo para el siguiente grafo:
+Importaciones:
+- A mano desde el programa usando matrices.
+- Usando matrices (adyacencia, de pesos y de incidencia .csv)
+- Formato nativo de MadnessMad (.json)
+- Formato nativo de SWGraphs (.xml)
 
-![grafo_json](/assets/ejemplo_grafo_json.png)
+Si el programa detecta un error a la hora de importar un grafo, la aplicación se lo comunicará al usuario mediante
+un código de erro que facilitará encontrar el error de la importación.
 
-El archivo JSON correspondiente lo puedes ver [aquí](./assets/ejemplo_grafo_json.json).
+Exportaciones:
+- Usando matrices (adyacencia, de pesos y de incidencia .csv)
+- Formato nativo de MadnessMad (.json)
+- Formato nativo de SWGraphs (.xml)
 
-#### Grafo a partir de un archivo .csv
+Vídeo ejemplo de la importación de matrices a mano:
 
-* [Matriz de adyacencia](./assets/archivo/matriz_adyacencia.csv)
-* [Matriz de pesos](./assets/archivo/matriz_pesos.csv)
-* [Matriz de incidencia](./assets/archivo/matriz_incidencia.csv)
-
-Para la matriz de adyacencia y de pesos los últimos dos parámetros sueltos pueden ser 1 o 0 y pueden estar en el csv o no,
-si no están por defecto ambos son 1. Indican, el primero si es o no ponderado y el segundo si es o no dirigido el grafo.
-
-
-#### A mano desde la interfaz
-El propio programa permite importar estas 3 matrices a partir de la propia interfaz de forma manual:
-
-![matriz_adyacencia](/assets/matriz_ady.gif)
-
-* Si la matriz es de adyacencia:
-    - Por defecto será dirigido y ponderado (1.0 para todas las aristas)
-    - Admite multiplicidad
-    - Admite bucles
-* Si la matriz es de pesos:
-    - Por defecto será dirigido y ponderado
-    - No admite multiplicidad
-    - Admite bucles
-* Si la matriz es de incidencia:
-    - Por defecto es no dirigido y ponderado (1.0 para todas las aristas)
-    - Admite bucles, con un 2
-    - No permite que la suma de las columnas sea distinto de 2 aunque si permite que sea 0 y esa arista no se dibuja
-
-#### Por un grafo de SwGraphs (.xml)
-
-Simplemente el programar permite importar un fichero .xml con el formato de SWGraphs
-
-### Exportaciones
-
-#### Grafo completo (.json)
-
-Igual que en el apartado de importaciones
-
-#### Grafo a partir de un archivo (.csv)
-
-Esta exportación se realizará desde el icono de "Matriz" desde la toolbar, permitiendo exportar los 3 tipos de matrices ya mencionados.
-
-Como la matriz de pesos no admite multiplicidad, si hay varias aristas paralelas entre dos vértices se añadirá en esa
-relación la suma de los pesos de las aristas paralelas que lleven la misma dirección si el grafo es dirigido.
-
-#### Por un grafo de SwGraphs (.xml)
-
-Simplemente el programar permite exportar un fichero .xml con el formato de SWGraphs
-
-### Guía de errores a la hora de importar un grafo
-
-* En el futuro, en la doc de la página web se dejarán ejemplo detallados de como solucionar errores,
-* para ello en el díalogo de erro se añadirá un link al error en cuestión en la web
-
-#### Archivo .json
-
-Aquí se pueden dar 3 tipos de errores:
-* [InvalidJsonStructure](./assets/jsonError/InvalidJsonStructure.json): simplemente la estructura del json no es correcta
-* [InvalidVertex](./assets/jsonError/InvalidVertex.json): la estructura es correcta, pero hay algo incorrecto en algún vértice del json (normalmente en el style)
-* [InvalidEdge](./assets/jsonError/InvalidEdge.json): la estructura es correcta, pero hay algo incorrecto en alguna arista del json (normalmente en el style)
-
-#### Archivo .csv
-
-Aquí pueden haber 2 tipos de errores:
-* [InvalidCSVFormat](./assets/csvErrors/InvalidCSVFormat.csv): el formato del CSV es incorrecto
-* [InvalidCSVIncidenceColumn](./assets/csvErrors/InvalidCSVIncidenceColumn.csv): cuando una columna suma un número disintos de 0 y de 2
-
-#### Archivo .xml
-* [InvalidXMLFormat](./assets/xmlError/InvalidXMLFormat.xml): el formato del xml es incorrecto
-
----
-
-## ⚙️ Opciones de grafo
-
-### Información del grafo
-
-///
-
-### Grados de los vértices
-///
-
-### Grafo subyacente
-
-Convierte el grafo a no dirigido, si el grafo es dirigido y tiene 2 aristas entre 2 vértices de direcciones opuestas
-y con el mismo peso, elimina una de ellas.
-
-### Convertir a dirigido (bidireccional)
-
-Realiza la acción contraria al **Grafo subyacente**.
-
-#### Si el grafo es **no dirigido**
-- Cada arista `{u, v}` se convierte en **dos aristas dirigidas**:
-  - `u → v`
-  - `v → u`
-- Ambas mantienen el mismo peso que la arista original.
-- El grafo pasa a ser dirigido.
-
-#### Si el grafo es **dirigido**
-- Para cada par de vértices conectados:
-  - Se agrupan las aristas por **peso**.
-  - Para cada peso `w`, si **todas** las aristas con peso `w` entre esos dos vértices van en **una única dirección**,
-    se añade **una arista** en la dirección opuesta con el mismo peso `w`.
-  - Si ya existe una arista de peso `w` en ambos sentidos, **no se añade nada** para ese peso.
-
-
-Esta operación garantiza la **bidireccionalidad mínima**, sin alterar las multiplicidades ni duplicar aristas innecesariamente.
-
----
-
-# 🧬 Apartado técnico
-
-## 🧠 Arquitectura del estado del grafo
-
-### GraphState
-* Contenedor raíz que agrupa todos los subestados del editor.
-
-#### GraphModelState
-* Define la estructura lógica del grafo (vértices, aristas y propiedades globales).
-
-#### GraphInteractionState
-* Gestiona cómo el usuario interactúa con el grafo (selecciones, arrastres, creación temporal).
-
-#### GraphUIState
-* Controla todo lo visual y los diálogos de la interfaz.
-
-#### GraphHistoryState
-* Administra el historial de acciones para deshacer y rehacer.
-
-#### GraphAlgorithmState
-* Mantiene el estado, datos y animaciones de los algoritmos ejecutados.
-
-#### GraphViewportState
-* Controla la transformación del lienzo (zoom y desplazamiento).
-
----
-
-## 🔵 VertexModel
-
-```kotlin
-data class VertexModel(
-    val id: String = Uuid.random().toString(),
-    var name: MutableState<String> = mutableStateOf("V${Globals.vCount++}"),
-    var position: Pair<Float, Float> = 0f to 0f,
-    var color: MutableState<Color> = mutableStateOf(Colors.VERTEX_DEFAULT),
-    var size: MutableState<Float> = mutableStateOf(1f),
-    var style: MutableState<VertexStyle> = mutableStateOf(VertexStyle.CIRCLE)
-)
-```
-
----
-
-## ➡️ EdgeModel
-
-```kotlin
-data class EdgeModel(
-  val id: String = Uuid.random().toString(),
-  var name: MutableState<String> = mutableStateOf("E${Globals.eCount++}"),
-  var vertex: MutableState<Pair<String, String>> = mutableStateOf("" to ""),
-  var weight: MutableState<Float> = mutableStateOf(1.0f),
-  var style: MutableState<EdgeStyle> = mutableStateOf(EdgeStyle.DEFAULT),
-  var curvature: MutableState<Float> = mutableStateOf(0f),
-  var loopAngle: MutableState<Float> = mutableStateOf(-45f),
-  var loopFactor: MutableState<Float> = mutableStateOf(3f),
-  var color: MutableState<Color> = mutableStateOf(Colors.EDGE_DEFAULT)
-){
-  fun isLoop() = vertex.value.first == vertex.value.second
-
-  fun changeDirection(){
-    vertex.value = vertex.value.second to vertex.value.first
-    curvature.value *= -1f
-  }
-}
-```
-
-La curvatura de la arista se obtiene aplicando una curva de Bézier, como se muestra en la siguiente imagen:
-![bezier_curvatura](/assets/beizer.jpg)
-
----
+![matriz_ady.gif](assets/external/matriz_ady.gif)
